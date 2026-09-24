@@ -1,4 +1,4 @@
-const CONTRACT = "";
+const CONTRACT = "0xEB9c8faA2246D1b8BD0BBB70fD8bC324D4de35D4";
 
 const memes = [
   { src: "images/memes/sill.png", alt: "Crumple loafs in a sunbeam on a wooden windowsill.", caption: "The sunbeam filed the paperwork." },

@@ -249,15 +249,19 @@ async function readCurve(token) {
     tryCall(curve, SEL.buybackEnabled)
   ]);
   if (!fee) return null;
+  const quoteReserve = BigInt(reserve || "0x0");
+  const tokenReserve = BigInt(tokens || "0x0");
+  let k = kValue ? BigInt(kValue) : 0n;
+  if (k === 0n && quoteReserve > 0n && tokenReserve > 0n) k = quoteReserve * tokenReserve;
   return {
     curve,
     feeBps: Number(BigInt(fee)),
     creatorTaxBps: Number(BigInt(tax || "0x0")),
     pairToken: wordAddress((pair || `0x${"0".repeat(64)}`).slice(2)),
     pairDecimals: Number(BigInt(decimals || "0x12")),
-    quoteReserve: BigInt(reserve || "0x0"),
-    tokenReserve: BigInt(tokens || "0x0"),
-    k: kValue ? BigInt(kValue) : 0n,
+    quoteReserve,
+    tokenReserve,
+    k,
     graduated: BigInt(done || "0x0") === 1n,
     buybackEnabled: BigInt(buyback || "0x0") === 1n
   };
@@ -448,7 +452,7 @@ async function sendSwap() {
   const slippage = Math.round(Number($("swap-slip").value || "5") * 100);
   if (!Number.isFinite(slippage) || slippage < 0 || slippage > 5000) throw new Error("Slippage must be between 0 and 50.");
 
-  if (!market.curve || market.curve.graduated || market.curve.k === 0n) {
+  if (!market.curve || market.curve.graduated) {
     const input = buying ? (market.nativeQuote ? "ETH" : market.curve?.pairToken || "ETH") : market.token;
     const output = buying ? market.token : (market.nativeQuote ? "ETH" : market.curve?.pairToken || "ETH");
     const url = `https://app.uniswap.org/swap?chain=robinhood&inputCurrency=${input}&outputCurrency=${output}`;
@@ -514,7 +518,7 @@ async function loadMarket(token) {
   $("chart-note").textContent = "Loading candles…";
   await refreshChart();
   updateSwapQuote();
-  if (!market.curve || market.curve.graduated || market.curve.k === 0n) {
+  if (!market.curve || market.curve.graduated) {
     $("swap-status").textContent = "Graduated pool. Connect a wallet, then swap opens this contract on the indexed market.";
   } else {
     $("swap-status").textContent = "The pons curve is still open. The quote is the contract math, and the swap is signed in your wallet.";
