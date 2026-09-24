@@ -209,6 +209,12 @@ function setupContract() {
   document.querySelector(".ledger-top span:last-child").textContent = "Address published";
 }
 
+function bootMarket() {
+  const valid = /^0x[a-fA-F0-9]{40}$/.test(CONTRACT);
+  if (window.startCrumpMarket) window.startCrumpMarket(valid ? CONTRACT : "");
+}
+window.bootMarket = bootMarket;
+
 function setupChrome() {
   const toggle = document.querySelector(".nav-toggle");
   const nav = document.querySelector("#site-nav");

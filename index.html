@@ -5,14 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>$CRUMP — Crumple, the Cat Who Sat Down</title>
   <meta name="description" content="Crumple is a round apricot cat in a crooked mustard vest. $CRUMP is his meme token on Robinhood Chain, powered by pons.">
+  <link rel="canonical" href="https://www.agentpfp.live/">
   <meta property="og:title" content="$CRUMP — Crumple, the Cat Who Sat Down">
   <meta property="og:description" content="A loaf, a vest, and a bridge. $CRUMP is a cat meme token powered by pons on Robinhood Chain.">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="images/memes/sill.png">
+  <meta property="og:url" content="https://www.agentpfp.live/">
+  <meta property="og:image" content="https://www.agentpfp.live/images/hero.png">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="$CRUMP — Crumple, the Cat Who Sat Down">
   <meta name="twitter:description" content="A loaf, a vest, and a bridge. $CRUMP is powered by pons.">
-  <meta name="twitter:image" content="images/memes/sill.png">
+  <meta name="twitter:image" content="https://www.agentpfp.live/images/hero.png">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,7 +25,7 @@
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="masthead">
     <div class="mast-top">
-      <p class="paper-name">The Windowsill Gazette<small>A cat paper for people who can sit still</small></p>
+      <p class="paper-name">The Windowsill Gazette<small>agentpfp.live · a cat paper for people who can sit still</small></p>
       <p class="issue-mark">Issue 01<b>$CRUMP</b></p>
     </div>
     <div class="nav-row">
@@ -32,9 +34,9 @@
         <a href="#story">Story</a>
         <a href="#moods">Moods</a>
         <a href="#memes">Memes</a>
+        <a href="#market">Market</a>
+        <a href="#swap">Swap</a>
         <a href="#token">Token</a>
-        <a href="#find">Find him</a>
-        <a href="#map">Map</a>
       </nav>
       <a class="pons-pill" href="https://www.ponsfamily.com/launchpad" target="_blank" rel="noreferrer">Powered by pons</a>
     </div>
@@ -44,7 +46,7 @@
     <section class="wrap front" id="top">
       <div>
         <div class="kicker">
-          <span class="hot">Pre-launch</span>
+          <span class="hot" id="launch-state">Pre-launch</span>
           <span>Robinhood Chain</span>
           <span>Powered by pons</span>
         </div>
@@ -58,7 +60,7 @@
       </div>
       <figure class="hero-frame" id="hero-frame">
         <div class="photo-stage">
-          <img src="images/hero.png" alt="Crumple, a round apricot cat in a mustard vest, loafing and looking straight ahead.">
+          <img src="images/hero.png" alt="Crumple sitting upright in a mustard vest, with two front paws and two hind paws.">
           <div class="sticker">powered<br>by pons</div>
         </div>
         <figcaption class="hero-caption"><span>Fig. 1 — The loaf</span><span>Vest included</span></figcaption>
@@ -269,12 +271,70 @@
     </section>
 
     <section class="interlude" aria-label="Crumple on the windowsill">
-      <img src="images/memes/sill.png" alt="Crumple loafs on a sunny windowsill above a quiet city.">
+      <img src="images/memes/sill.png" alt="Crumple sits on a sunny windowsill, four paws on the wood.">
       <div class="veil"></div>
       <div class="wrap">
         <p class="eyebrow" style="color:#f2c14b;">The beam, continued</p>
         <h2>He does not chase.<br>He occupies.</h2>
         <p>Powered by pons, so the only thing required to move is a signature in your own wallet.</p>
+      </div>
+    </section>
+
+    <section class="section" id="market">
+      <div class="wrap">
+        <p class="eyebrow">agentpfp.live</p>
+        <h2>The live <span>windowsill.</span></h2>
+        <p>Chart, volume, creator commission, burn, and swap all follow the contract printed in the ledger. Until that address is there, the numbers stay blank.</p>
+        <div class="market-grid">
+          <div class="chart-card">
+            <div class="chart-top">
+              <div>
+                <p class="eyebrow">Trading chart</p>
+                <strong id="chart-price">—</strong>
+                <span id="chart-change"></span>
+              </div>
+              <div class="filters" id="chart-ranges" role="group" aria-label="Chart range">
+                <button type="button" data-frame="minute" data-aggregate="15" aria-pressed="false">15m</button>
+                <button type="button" data-frame="hour" data-aggregate="1" aria-pressed="true">1h</button>
+                <button type="button" data-frame="hour" data-aggregate="4" aria-pressed="false">4h</button>
+                <button type="button" data-frame="day" data-aggregate="1" aria-pressed="false">1d</button>
+              </div>
+            </div>
+            <canvas id="price-chart" aria-label="Trading chart"></canvas>
+            <p id="chart-note" class="note"></p>
+          </div>
+          <div class="stat-stack">
+            <article><span>24h volume</span><strong id="stat-volume">—</strong><small id="stat-volume-note"></small></article>
+            <article><span>Creator commission</span><strong id="stat-creator">—</strong><small id="stat-creator-note"></small></article>
+            <article><span>Token burn</span><strong id="stat-burn">—</strong><small id="stat-burn-note"></small></article>
+            <article><span>Price</span><strong id="stat-price">—</strong><small id="stat-price-note"></small></article>
+          </div>
+        </div>
+        <div class="swap-card" id="swap">
+          <div>
+            <p class="eyebrow">Token swap</p>
+            <h3>Sign it yourself.</h3>
+            <p>On the pons curve, this form sends the buy or sell from your wallet. After graduation, it opens the indexed pool for the same contract.</p>
+            <p class="fine">Meme tokens can go to zero. Read the amount before you confirm.</p>
+          </div>
+          <form class="swap-form" onsubmit="return false;">
+            <div class="filters" id="swap-side" data-side="buy" role="group" aria-label="Buy or sell">
+              <button type="button" data-side="buy" aria-pressed="true">Buy</button>
+              <button type="button" data-side="sell" aria-pressed="false">Sell</button>
+            </div>
+            <label id="swap-pay-label" for="swap-amount">You pay</label>
+            <input id="swap-amount" inputmode="decimal" autocomplete="off" placeholder="0.0">
+            <label id="swap-receive-label">You receive</label>
+            <strong id="swap-out">—</strong>
+            <label for="swap-slip">Slippage %</label>
+            <input id="swap-slip" type="number" min="0" max="50" step="0.1" value="5">
+            <div class="hero-actions">
+              <button class="btn secondary" type="button" id="wallet-button">Connect wallet</button>
+              <button class="btn" type="button" id="swap-button" disabled>Swap</button>
+            </div>
+            <p id="swap-status" class="note"></p>
+          </form>
+        </div>
       </div>
     </section>
 
@@ -294,8 +354,8 @@
             <div class="fact"><span>Network</span><strong>Robinhood Chain</strong></div>
             <div class="fact"><span>Chain ID</span><strong>4663</strong></div>
             <div class="fact"><span>Launch</span><strong>pons</strong></div>
-            <div class="fact"><span>Quote</span><strong>ETH</strong></div>
-            <div class="fact"><span>Supply</span><strong>Fixed, minted to the curve</strong></div>
+            <div class="fact"><span>Quote</span><strong id="fact-quote">ETH</strong></div>
+            <div class="fact"><span>Supply</span><strong id="fact-supply">Fixed, minted to the curve</strong></div>
           </div>
           <div class="contract-box">
             <span>Contract address</span>
@@ -389,7 +449,7 @@
           <article>
             <em>04</em>
             <h3>Print the address</h3>
-            <p>The contract lands in the ledger first. A buy button with no address is just a link to the launchpad.</p>
+            <p>The contract lands in the ledger first. The chart and the swap use that address, and no other.</p>
           </article>
         </div>
       </div>
@@ -402,8 +462,8 @@
         <div class="notices">
           <article class="notice">
             <small>Status</small>
-            <strong>Pre-launch. The beam is warm. The contract is not public.</strong>
-            <p>No chart, no exchange listing, and no official social account yet. If someone messages you as “Crumple support,” it is not this paper.</p>
+            <strong>The desk is wired. It wakes up with the contract.</strong>
+            <p>Paste the address into <code>CONTRACT</code> in js/site.js. Chart, volume, creator commission, burn, and swap then read Robinhood Chain. If someone messages you as “Crumple support,” it is not this paper.</p>
           </article>
           <a class="notice" href="https://docs.ponsfamily.com/v2" target="_blank" rel="noreferrer">
             <small>Launch venue</small>
@@ -434,7 +494,7 @@
           <a href="#token">Ledger</a>
         </div>
       </div>
-      <p class="legal">$CRUMP is a meme about a fictional cat. It is not financial advice, not an offer to sell securities, and not affiliated with Robinhood or the PONS token. Trading meme tokens can result in a total loss. Verify the contract yourself. Powered by <a href="https://www.ponsfamily.com/" target="_blank" rel="noreferrer">pons</a> on Robinhood Chain.</p>
+      <p class="legal">$CRUMP lives at <a href="https://www.agentpfp.live/">agentpfp.live</a>. It is a meme about a fictional cat. It is not financial advice, not an offer to sell securities, and not affiliated with Robinhood or the PONS token. Trading meme tokens can result in a total loss. Verify the contract yourself. Powered by <a href="https://www.ponsfamily.com/" target="_blank" rel="noreferrer">pons</a> on Robinhood Chain.</p>
     </div>
   </footer>
 
@@ -452,5 +512,6 @@
     </div>
   </dialog>
   <script src="js/site.js"></script>
+  <script src="js/market.js"></script>
 </body>
 </html>
